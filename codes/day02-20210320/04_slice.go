@@ -66,5 +66,53 @@ func main() {
 	nums2 := nums[2:len(nums)]
 	nums = append(nums1,nums2...)  //解包操作
 	fmt.Println(nums)
-	//02：04
+	//容量问题
+	nums = []int{}
+	fmt.Println(len(nums),cap(nums))
+	nums = append(nums, 1)
+	fmt.Println(len(nums),cap(nums))
+	nums = append(nums, 2)
+	fmt.Println(len(nums),cap(nums))
+	nums = append(nums, 3)
+	fmt.Println(len(nums),cap(nums))
+	nums = append(nums, 4)
+	fmt.Println(len(nums),cap(nums))
+	nums = append(nums, 5)
+	fmt.Println(len(nums),cap(nums))   //容量翻倍
+
+	numsarray := [5]int{1,3,5,7,9}
+	nums = numsarray[1:3]     //len=2,cap=4
+	fmt.Println(len(nums),cap(nums))
+	nums = append(nums, 1000)   //切片共享底层数组
+	fmt.Println(nums)
+	fmt.Println(numsarray)
+
+	//限制容量
+	//[start:end:cap_end]
+	nums = numsarray[1:3:3]
+	fmt.Println(len(nums),cap(nums))
+	nums = append(nums,1)
+	fmt.Println(nums,len(nums),cap(nums))
+	fmt.Println(numsarray)
+	//切片再切片
+	nums = make([]int,3,10)
+	nums[0] = 1
+	nums[1] = 2
+	nums[2] = 3
+	fmt.Println(nums)
+
+	numsslice := nums[1:2]
+	fmt.Println(numsslice)
+	fmt.Println(len(numsslice),cap(numsslice))
+	numsslice =append(numsslice,100)
+	fmt.Println(nums)  //1,2,100
+
+	//copy(dest,src)
+	dest := make([]int,3)
+	src :=[]int{2,3,4}
+	fmt.Println(src,dest)
+	copy(dest,src)
+	fmt.Println(src,dest)
+
+
 }
